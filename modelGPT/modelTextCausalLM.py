@@ -18,7 +18,7 @@ class ModelTextCausalLM:
 
 		logging.info('Loading model...')
 		self.model = AutoModelForCausalLM.from_pretrained(model_path,
-			##torch_dtype=torch.float16, # use float16 if on GPU
+			#torch_dtype=torch.float16, # use float16 if on GPU
 			low_cpu_mem_usage=True)
 		logging.info('Loading tokenizer...')
 		self.tokenizer = AutoTokenizer.from_pretrained(tokenizer_path)
@@ -30,7 +30,12 @@ class ModelTextCausalLM:
 		tokens = self.tokenizer(text, return_tensors="pt").input_ids
 		return tokens
 
-	def generate(self, tokens, no_decode=False):
+	def generate(self, input, no_tokenize=False):
+		if not no_tokenize:
+			tokens = self.tokenizer(input, return_tensors="pt").input_ids
+		else:
+			tokens = input
+
 		generate_tokens = self.model.generate(
 			input_ids=tokens,
 			max_length=200,
@@ -38,7 +43,18 @@ class ModelTextCausalLM:
 			do_sample=True
 		)
 
-		if no_decode:
+		if no_tokenize:
 			return generate_tokens
 		else:
-			return self.tokenizer.batch_decode(generate_tokens, skip_special_tokens=False)
+			return self.tokenizer.batch_decode(generate_tokens, skip_special_tokens=False)[0]
+	
+	def validate(self, text):
+		
+		return text
+	
+	def extract_response(self, text, prompt=None, eos_token="<|endoftext|>"):
+		if prompt is None:
+			return
+		else:
+			response = text[len(prompt):text.rfind(eos_token)-1]
+		return response
