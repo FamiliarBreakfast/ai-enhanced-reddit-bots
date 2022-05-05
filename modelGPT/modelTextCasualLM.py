@@ -1,5 +1,4 @@
-from lib2to3.pgen2.tokenize import generate_tokens
-from transformers import AutoTokenizer, AutoModelForCasualLM
+from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 import numpy as np
 
