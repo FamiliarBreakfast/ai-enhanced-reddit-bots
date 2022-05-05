@@ -12,7 +12,7 @@ import logging
 class ModelTextCasualLM:
 	def __init__(self, model_path, tokenizer_path):
 		logging.info('Loading model...')
-		model = AutoModelForCasualLM.from_pretrained('gpt2', # replace with your model (path or huggingface model)
+		model = AutoModelForCausalLM.from_pretrained('gpt2', # replace with your model (path or huggingface model)
 			##torch_dtype=torch.float16, # use float16 if on GPU
 			low_cpu_mem_usage=True)
 		logging.info('Loading tokenizer...')
