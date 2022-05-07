@@ -19,6 +19,6 @@ Todo:
 - Remove database abstraction(?) I'm not sure if it's nescessary..
 
 **This codebase is very young. Expect bugs and incomplete features.**  
-Based on the work of:
+Based on the work of:  
 [https://github.com/zacc/ssi-bot](https://github.com/zacc/ssi-bot)  
 [https://github.com/umm-maybe/ssi-bot](https://github.com/umm-maybe/ssi-bot/tree/call_HF)
