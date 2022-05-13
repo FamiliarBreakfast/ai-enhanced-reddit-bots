@@ -40,14 +40,3 @@ class ModelTextCausalLM:
 		if no_tokenize:
 			return generate_tokens
 		return self.tokenizer.batch_decode(generate_tokens, skip_special_tokens=False)[0]
-	
-	def validate(self, text):
-		
-		return text
-	
-	def extract_response(self, text, prompt=None, eos_token='<|endoftext|>'):
-		if prompt is None:
-			return #todo: auto detect prompt
-		else:
-			response = text[len(prompt):text.rfind(eos_token)-1]
-		return response
