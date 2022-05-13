@@ -1,9 +1,6 @@
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 
-import json
-import random
-
 # logging
 import sys
 import logging
