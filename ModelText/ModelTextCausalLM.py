@@ -19,7 +19,6 @@ class ModelTextCausalLM:
 		self.tokenizer = AutoTokenizer.from_pretrained(tokenizer_path)
 
 	#todo: add logging
-	#todo: pull from database
 	
 	def tokenize(self, text):
 		tokens = self.tokenizer(text, return_tensors="pt").input_ids
@@ -52,9 +51,3 @@ class ModelTextCausalLM:
 		else:
 			response = text[len(prompt):text.rfind(eos_token)-1]
 		return response
-
-class ModelTextSequenceClassifier:
-	def __init__(self, model_path='bert-base-uncased', tokenizer_path='bert-base-uncased', device='cpu'):
-		self.model_path = model_path
-		pass #todo: deal with this later
-		#should this be in a seperate file?
