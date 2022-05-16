@@ -25,24 +25,19 @@ class ModelTextCausalLM:
 		logging.info(f'Model and tokenizer loaded after ms')#todo: measure time
 		logging.info(f'Memory usage: {Memory.get_memory_usage(2)}')
 
-	def generate(self, input, no_tokenize=False): #todo: add batch processing
-		if not no_tokenize:
+	def generate(self, input, tokenize=True): #todo: add batch processing
+		if tokenize:
 			logging.debug(f'Tokenizing with input {input}')
-			tokens = self.tokenizer(input).input_ids
+			tokens = self.tokenizer(input, return_tensors="pt").input_ids
 		else:
 			logging.debug(f'No tokenization')
 			tokens = input
 
 		logging.info(f'Generating for input {input}')
 		logging.debug(f'Generating with tokens {tokens}')
-		generate_tokens = self.model.generate(#todo: custom config
-			input_ids=tokens,
-			max_length=200,
-			temperature=1.0,
-			do_sample=True
-		)
+		generate_tokens = self.model.generate(tokens, max_length=200, temperature=1.0, do_sample=True)#todo: custom config
 
-		if no_tokenize:
+		if not tokenize:
 			return generate_tokens
 		return self.tokenizer.batch_decode(generate_tokens, skip_special_tokens=False)[0]
 
