@@ -26,5 +26,7 @@ Based on the work of:
 
 - [zacc/ssi-bot](https://github.com/zacc/ssi-bot)  
 - [umm-maybe/ssi-bot](https://github.com/umm-maybe/ssi-bot/tree/call_HF)  
+
 Also have a look at:  
+
 - [AJStangl/reddit-function-bot](https://github.com/AJStangl/reddit-function-bot)
