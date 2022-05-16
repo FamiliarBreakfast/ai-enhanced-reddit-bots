@@ -21,7 +21,7 @@ class BasicDB:
 	def stack(self, table, query): #push to table
 		self.conn.execute(f"INSERT INTO {table} VALUES ({query});")#!!
 	def check(self, table, query):
-		return self.conn.execute(f"SELECT * FROM {table} WHERE {query} LIMIT 1;")
+		return self.conn.execute(f"SELECT * FROM {table} WHERE url = {query} LIMIT 1;")
 
 class CustomDB(BasicDB):
 	def __init__(self, db_path, table_name, table_schema):
